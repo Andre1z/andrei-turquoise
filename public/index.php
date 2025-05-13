@@ -4,12 +4,11 @@
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../core/Database.php';
 
-// Inicia la sesión si aún no está activa.
+// Inicia la sesión si aún no está activa
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Obtener el parámetro 'page' de la URL; por defecto se carga "home".
 $page = $_GET['page'] ?? 'home';
 
 switch ($page) {
@@ -27,6 +26,21 @@ switch ($page) {
         break;
     case 'profile':
         include __DIR__ . '/profile.php';
+        break;
+    case 'restaurants':
+        include __DIR__ . '/restaurants.php';
+        break;
+    case 'edit_restaurant':
+        include __DIR__ . '/edit_restaurant.php';
+        break;
+    case 'delete_restaurant':
+        include __DIR__ . '/delete_restaurant.php';
+        break;
+    case 'edit_reservation':
+        include __DIR__ . '/edit_reservation.php';
+        break;
+    case 'delete_reservation':
+        include __DIR__ . '/delete_reservation.php';
         break;
     case 'logout':
         include __DIR__ . '/logout.php';
