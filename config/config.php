@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 
 // Configuración general de la aplicación
 define('APP_NAME', 'Gestión de Restaurantes');
-define('APP_URL', 'http://localhost/gestion_restaurantes_simple');
+define('APP_URL', 'http://localhost/andrei-turquoise');
 date_default_timezone_set('Europe/Madrid');
 
 // Configuración de la base de datos utilizando SQLite
