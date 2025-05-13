@@ -1,112 +1,205 @@
-/* style.css */
+/* ===========================================
+   Reset y Estilos Base
+   ===========================================
+*/
 
-/* Reset y estilos básicos */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html, body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Fondo degradado vibrante */
-    background: linear-gradient(135deg, #1e90ff, #ff1493);
-    color: #fff;
+html,
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
     line-height: 1.6;
 }
 
-/* Enlaces */
-a {
-    color: #ffda79;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
+/* ===========================================
+   Encabezado y Navegación
+   ===========================================
+*/
 
-a:hover {
-    color: #ffc107;
-}
-
-/* Header */
 header {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
 }
 
 header h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     text-align: center;
     margin-bottom: 10px;
 }
 
-nav ul {
+header nav ul {
+    list-style: none;
     display: flex;
     justify-content: center;
     gap: 15px;
-    list-style: none;
 }
 
-nav ul li a {
-    padding: 8px 16px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.2);
+header nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
 }
 
-nav ul li a:hover,
-nav ul li a.active {
-    background: #ffda79;
-    color: #000;
+header nav ul li a:hover,
+header nav ul li a.active {
+    color: #ffcc00;
 }
 
-/* Main y Footer */
+/* ===========================================
+   Estructura General (Main y Sections)
+   ===========================================
+*/
+
 main {
     padding: 20px;
-    min-height: calc(100vh - 140px); /* Ajuste considerando el header y footer */
 }
 
-footer {
-    background: rgba(0, 0, 0, 0.7);
+section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Secciones específicas (login, register, dashboard) */
+.login-section,
+.register-section,
+.dashboard-section {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-    padding: 15px;
-    position: relative;
 }
 
-/* Formularios */
-.form-group {
+.login-section h2,
+.register-section h2,
+.dashboard-section h2 {
     margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+/* ===========================================
+   Formularios y Botones
+   ===========================================
+*/
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 .form-group label {
-    display: block;
+    font-weight: bold;
     margin-bottom: 5px;
-    color: #ffda79;
 }
 
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="password"],
-.form-group textarea,
-.form-group select {
-    width: 100%;
+.form-group textarea {
     padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.9);
-    color: #333;
-}
-
-input[type="submit"],
-button {
-    background: #ff1493;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+    border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
-    transition: all 0.3s ease;
 }
 
-input[type="submit"]:hover,
+.form-group input[type="submit"],
+button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-group input[type="submit"]:hover,
 button:hover {
-    background: #ff69b4;
+    background-color: #555;
+}
+
+/* ===========================================
+   Mensajes de Error y Éxito
+   ===========================================
+*/
+
+.error {
+    color: #cc0000;
+    background-color: #ffe5e5;
+    border: 1px solid #cc0000;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.success {
+    color: #006600;
+    background-color: #e5ffe5;
+    border: 1px solid #006600;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+/* ===========================================
+   Pie de Página
+   ===========================================
+*/
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+
+/* ===========================================
+   Media Queries (Responsive)
+   ===========================================
+*/
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"],
+    .form-group textarea {
+        width: 100%;
+    }
 }
