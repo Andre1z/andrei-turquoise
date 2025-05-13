@@ -1,0 +1,16 @@
+/* dashboard.css */
+
+.dashboard-section {
+    padding: 20px;
+    text-align: center;
+}
+
+.dashboard-section h2 {
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+
+.dashboard-section p {
+    font-size: 1.1em;
+    color: #555;
+}
