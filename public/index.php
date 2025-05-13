@@ -1,22 +1,32 @@
 <?php
 // public/index.php
+
+// Incluir la configuración y la clase de base de datos si son necesarios
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../core/Database.php';
 
-// Aquí puedes implementar un enrutador sencillo. Por ejemplo, un switch basado en un parámetro "page".
+// Iniciar la sesión para poder gestionar las variables de usuario
+session_start();
+
+// Determinar la página solicitada; por defecto se carga "home"
 $page = $_GET['page'] ?? 'home';
 
 switch ($page) {
     case 'home':
-        include 'home.php';
+        include __DIR__ . '/home.php';
         break;
     case 'login':
-        include 'login.php';
+        include __DIR__ . '/login.php';
         break;
     case 'register':
-        include 'register.php';
+        include __DIR__ . '/register.php';
         break;
-    // Agrega más casos según necesites.
+    case 'dashboard':
+        include __DIR__ . '/dashboard.php';
+        break;
+    case 'logout':
+        include __DIR__ . '/logout.php';
+        break;
     default:
         echo "Página no encontrada.";
         break;
