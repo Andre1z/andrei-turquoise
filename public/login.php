@@ -1,13 +1,53 @@
 <?php
 // public/login.php
 
-// Inicia la sesión, en caso de que no se haya iniciado ya
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../core/Database.php';
+
 session_start();
 
-// Si ya existe un usuario en sesión, redirige a una página de "dashboard" o inicio
+// Si ya existe un usuario en sesión, redirige al dashboard
 if (isset($_SESSION['user'])) {
     header("Location: index.php?page=dashboard");
     exit;
+}
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Recoger y sanitizar los datos del formulario
+    $email    = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if (empty($email) || empty($password)) {
+        $error = 'Por favor, complete todos los campos.';
+    } else {
+        // Obtener la conexión a la base de datos
+        $db = Database::getInstance()->getConnection();
+
+        // Preparamos la consulta para obtener el usuario según el email ingresado
+        $stmt = $db->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+        $stmt->execute([':email' => $email]);
+        $user = $stmt->fetch();
+
+        if ($user) {
+            // Verificamos la contraseña (usando password_verify, considerando que en registro se hashea)
+            if (password_verify($password, $user->password)) {
+                // Inicio de sesión correcto: se guarda la información mínima del usuario en la sesión
+                $_SESSION['user'] = [
+                    'id'    => $user->id,
+                    'name'  => $user->name,
+                    'email' => $user->email,
+                ];
+                header("Location: index.php?page=dashboard");
+                exit;
+            } else {
+                $error = 'Contraseña incorrecta.';
+            }
+        } else {
+            $error = 'Usuario no encontrado.';
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -29,10 +69,13 @@ if (isset($_SESSION['user'])) {
             </ul>
         </nav>
     </header>
+
     <main>
         <section class="login-section">
             <h2>Iniciar Sesión</h2>
-            <!-- El formulario enviará la información al mismo index.php, en el que tu enrutador decidirá cómo procesarla -->
+            <?php if ($error): ?>
+                <div class="error"><?php echo $error; ?></div>
+            <?php endif; ?>
             <form method="post" action="index.php?page=login">
                 <div class="form-group">
                     <label for="email">Correo Electrónico:</label>
@@ -49,6 +92,7 @@ if (isset($_SESSION['user'])) {
             <p>¿No tienes una cuenta? <a href="index.php?page=register">Regístrate aquí</a></p>
         </section>
     </main>
+
     <footer>
         <p>&copy; <?php echo date("Y"); ?> <?php echo APP_NAME; ?>. Todos los derechos reservados.</p>
     </footer>
