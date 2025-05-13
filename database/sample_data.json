@@ -1,0 +1,111 @@
+{
+  "restaurants": [
+    {
+      "restaurant_name": "La Buena Mesa",
+      "direction": "Calle Mayor 123, Valencia",
+      "email": "contacto@labuenamesa.com",
+      "phone": "600111111"
+    },
+    {
+      "restaurant_name": "Sabor Mediterráneo",
+      "direction": "Av. del Mar 456, Valencia",
+      "email": "info@sabormediterraneo.com",
+      "phone": "600222222"
+    },
+    {
+      "restaurant_name": "El Rincón del Chef",
+      "direction": "Plaza de España 789, Valencia",
+      "email": "reservas@rincondelchef.com",
+      "phone": "600333333"
+    },
+    {
+      "restaurant_name": "Restaurante El Prado",
+      "direction": "Calle Real 10, Valencia",
+      "email": "contacto@prado.com",
+      "phone": "600444444"
+    },
+    {
+      "restaurant_name": "Casa de Tapas",
+      "direction": "Calle de las Tapas 5, Valencia",
+      "email": "info@casadetapas.com",
+      "phone": "600555555"
+    },
+    {
+      "restaurant_name": "El Fogón",
+      "direction": "Av. de la Paz 18, Valencia",
+      "email": "reservas@elfogon.com",
+      "phone": "600666666"
+    },
+    {
+      "restaurant_name": "La Terraza",
+      "direction": "Calle del Sol 2, Valencia",
+      "email": "contacto@laterraza.com",
+      "phone": "600777777"
+    },
+    {
+      "restaurant_name": "Restaurante La Viña",
+      "direction": "Av. de los Olivos 12, Valencia",
+      "email": "info@lavina.com",
+      "phone": "600888888"
+    },
+    {
+      "restaurant_name": "El Jardín",
+      "direction": "Calle de las Flores 22, Valencia",
+      "email": "reservas@eljardin.com",
+      "phone": "600999999"
+    },
+    {
+      "restaurant_name": "Café Gourmet",
+      "direction": "Avenida Gourmet 33, Valencia",
+      "email": "contacto@cafegourmet.com",
+      "phone": "601000000"
+    },
+    {
+      "restaurant_name": "La Bodega",
+      "direction": "Calle de la Bodega 44, Valencia",
+      "email": "info@labodega.com",
+      "phone": "601111111"
+    },
+    {
+      "restaurant_name": "El Sabor Auténtico",
+      "direction": "Plaza del Sabor 55, Valencia",
+      "email": "reservas@elsabor.com",
+      "phone": "601222222"
+    },
+    {
+      "restaurant_name": "Cocina y Vino",
+      "direction": "Calle del Vino 66, Valencia",
+      "email": "contacto@cocinayvino.com",
+      "phone": "601333333"
+    },
+    {
+      "restaurant_name": "El Paladar",
+      "direction": "Av. Paladar 77, Valencia",
+      "email": "info@elpaladar.com",
+      "phone": "601444444"
+    },
+    {
+      "restaurant_name": "Bistró Moderno",
+      "direction": "Calle Moderna 88, Valencia",
+      "email": "reservas@bistro.com",
+      "phone": "601555555"
+    }
+  ],
+  "reservations": [
+    { "client_name": "Juan Pérez" },
+    { "client_name": "María García" },
+    { "client_name": "Carlos López" },
+    { "client_name": "Ana Martínez" },
+    { "client_name": "José Ramírez" },
+    { "client_name": "Laura Fernández" },
+    { "client_name": "Pedro Sánchez" },
+    { "client_name": "Marta Díaz" },
+    { "client_name": "Luis Gómez" },
+    { "client_name": "Carmen Ortega" },
+    { "client_name": "Sergio Ruiz" },
+    { "client_name": "Patricia Moreno" },
+    { "client_name": "Rafael Jiménez" },
+    { "client_name": "Elena Torres" },
+    { "client_name": "David Fernández" }
+  ]
+}
