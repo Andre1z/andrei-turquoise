@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../core/Database.php';
 
-// Inicia la sesión si aún no está activa
+// Iniciar la sesión si aún no está activa
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -30,11 +30,17 @@ switch ($page) {
     case 'restaurants':
         include __DIR__ . '/restaurants.php';
         break;
+    case 'create_restaurant':
+        include __DIR__ . '/create_restaurant.php';
+        break;
     case 'edit_restaurant':
         include __DIR__ . '/edit_restaurant.php';
         break;
     case 'delete_restaurant':
         include __DIR__ . '/delete_restaurant.php';
+        break;
+    case 'create_reservation':
+        include __DIR__ . '/create_reservation.php';
         break;
     case 'edit_reservation':
         include __DIR__ . '/edit_reservation.php';
