@@ -4,7 +4,10 @@
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../core/Database.php';
 
-session_start();
+// Inicio la sesión solo si no está activa.
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Si ya existe un usuario en sesión, redirige al dashboard
 if (isset($_SESSION['user'])) {
@@ -25,15 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Obtener la conexión a la base de datos
         $db = Database::getInstance()->getConnection();
 
-        // Preparamos la consulta para obtener el usuario según el email ingresado
+        // Preparamos la consulta para obtener el usuario según el email
         $stmt = $db->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
         $stmt->execute([':email' => $email]);
         $user = $stmt->fetch();
 
         if ($user) {
-            // Verificamos la contraseña (usando password_verify, considerando que en registro se hashea)
+            // Validar la contraseña usando password_verify
             if (password_verify($password, $user->password)) {
-                // Inicio de sesión correcto: se guarda la información mínima del usuario en la sesión
+                // Inicio de sesión exitoso: se guarda la información del usuario en la sesión
                 $_SESSION['user'] = [
                     'id'    => $user->id,
                     'name'  => $user->name,
