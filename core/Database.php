@@ -6,10 +6,7 @@ class Database {
     private $pdo;
 
     private function __construct() {
-        if (DB_DRIVER !== 'sqlite') {
-            die("Este proyecto está configurado para usar SQLite únicamente.");
-        }
-
+        // Asumimos que el driver siempre es SQLite según la configuración actual
         $dsn = 'sqlite:' . DB_PATH;
 
         try {
@@ -18,6 +15,7 @@ class Database {
             die("Error de conexión a la base de datos (SQLite): " . $e->getMessage());
         }
 
+        // Configuramos PDO para lanzar excepciones
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     }
@@ -33,7 +31,10 @@ class Database {
         return $this->pdo;
     }
 
+    // __wakeup() debe ser público, pero en este caso puede quedar vacío
+    public function __wakeup() {}
+
+    // Impide la clonación
     private function __clone() {}
-    private function __wakeup() {}
 }
 ?>
