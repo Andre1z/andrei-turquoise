@@ -3,7 +3,7 @@
  * insert_sample_data.php
  *
  * Este script inserta 15 registros de ejemplo en las tablas 'restaurants' y 'reservations'
- * utilizando datos definidos en un archivo JSON llamado "sample_data.json".
+ * utilizando datos definidos en un archivo JSON (sample_data.json).
  *
  * Procedimiento:
  *   1. Lee y decodifica el archivo JSON.
@@ -12,11 +12,10 @@
  *   4. Actualiza el campo 'id_reservation' en 'restaurants' para relacionar cada restaurante
  *      con su correspondiente reserva.
  *
- * Nota: Asegúrate de haber creado previamente las tablas 'restaurants' y 'reservations'
- *       y de que la clave foránea en 'restaurants' apunte a 'reservations'.
+ * Nota: Las tablas fueron creadas sin restricciones de claves foráneas para este proceso.
  */
 
-// Ruta del archivo JSON (se asume que el archivo se llama "sample_data.json" y se encuentra en la misma carpeta)
+// Ruta del archivo JSON (se asume que el archivo sample_data.json se encuentra en la misma carpeta)
 $jsonFile = __DIR__ . '/sample_data.json';
 
 if (!file_exists($jsonFile)) {
@@ -41,8 +40,8 @@ try {
     // Conectar a la base de datos SQLite
     $pdo = new PDO("sqlite:" . $databasePath);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // Activar soporte para claves foráneas
-    $pdo->exec("PRAGMA foreign_keys = ON");
+    // No activamos las claves foráneas, ya que las tablas se crearon sin ellas.
+    // $pdo->exec("PRAGMA foreign_keys = ON");
 
     // -------------------------------------------------------------------------
     // 1. Insertar datos en la tabla 'restaurants'
@@ -67,7 +66,7 @@ try {
     // -------------------------------------------------------------------------
     // 2. Insertar datos en la tabla 'reservations'
     // -------------------------------------------------------------------------
-    // Se asigna cada reserva al restaurante correspondiente (por el orden de los arrays)
+    // Se asigna cada reserva al restaurante correspondiente según su orden en el JSON.
     $stmtReservation = $pdo->prepare("
         INSERT INTO reservations (id_restaurant, client_name)
         VALUES (:id_restaurant, :client_name)
@@ -76,6 +75,7 @@ try {
     $reservationIds = [];
     $i = 0;
     foreach ($data['reservations'] as $reservation) {
+        // Se asocia cada reserva al restaurante correspondiente según el orden
         $id_restaurant = isset($restaurantIds[$i]) ? $restaurantIds[$i] : null;
         $stmtReservation->execute([
             ':id_restaurant' => $id_restaurant,
