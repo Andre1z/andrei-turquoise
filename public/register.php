@@ -1,13 +1,69 @@
 <?php
 // public/register.php
 
-// Inicia la sesión si aún no se ha iniciado
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../core/Database.php';
+
 session_start();
 
-// Si el usuario ya está autenticado, redirige a una página (por ejemplo, dashboard)
+// Si el usuario ya está autenticado, redirige al dashboard
 if (isset($_SESSION['user'])) {
     header("Location: index.php?page=dashboard");
     exit;
+}
+
+$error   = '';
+$success = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Recoger y sanitizar los datos del formulario
+    $name             = trim($_POST['name'] ?? '');
+    $email            = trim($_POST['email'] ?? '');
+    $password         = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
+
+    if (empty($name) || empty($email) || empty($password) || empty($confirm_password)) {
+        $error = 'Todos los campos son obligatorios.';
+    } elseif ($password !== $confirm_password) {
+        $error = 'Las contraseñas no coinciden.';
+    } else {
+        $db = Database::getInstance()->getConnection();
+
+        // Verificar que no exista ya un usuario con ese correo
+        $stmt = $db->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+        $stmt->execute([':email' => $email]);
+        if ($stmt->fetch()) {
+            $error = 'Ya existe un usuario registrado con este correo electrónico.';
+        } else {
+            // Hashear la contraseña usando el algoritmo default de PHP
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+            // Insertar el nuevo usuario en la base de datos
+            $stmt = $db->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
+            $inserted = $stmt->execute([
+                ':name'     => $name,
+                ':email'    => $email,
+                ':password' => $passwordHash
+            ]);
+
+            if ($inserted) {
+                // Opcional: Obtener el ID del usuario recién insertado
+                $userId = $db->lastInsertId();
+
+                // Iniciamos la sesión para el nuevo usuario
+                $_SESSION['user'] = [
+                    'id'    => $userId,
+                    'name'  => $name,
+                    'email' => $email
+                ];
+
+                $success = 'Registro exitoso. Redirigiendo al dashboard...';
+                header("Refresh:2; url=index.php?page=dashboard");
+            } else {
+                $error = 'Error al registrar el usuario. Inténtalo de nuevo.';
+            }
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -29,10 +85,16 @@ if (isset($_SESSION['user'])) {
             </ul>
         </nav>
     </header>
+
     <main>
         <section class="register-section">
             <h2>Registrarse</h2>
-            <!-- El formulario enviará la información al mismo index.php mediante el parámetro "page=register" -->
+            <?php if ($error): ?>
+                <div class="error"><?php echo $error; ?></div>
+            <?php endif; ?>
+            <?php if ($success): ?>
+                <div class="success"><?php echo $success; ?></div>
+            <?php endif; ?>
             <form method="post" action="index.php?page=register">
                 <div class="form-group">
                     <label for="name">Nombre Completo:</label>
@@ -57,6 +119,7 @@ if (isset($_SESSION['user'])) {
             <p>¿Ya tienes una cuenta? <a href="index.php?page=login">Inicia Sesión</a></p>
         </section>
     </main>
+
     <footer>
         <p>&copy; <?php echo date("Y"); ?> <?php echo APP_NAME; ?>. Todos los derechos reservados.</p>
     </footer>
