@@ -127,7 +127,7 @@ try {
     ");
     
     $restaurantIds = [];
-    // Insertar cada restaurante y guardar su id
+    // Insertar cada restaurante y guardar su ID generado
     foreach ($restaurants as $restaurant) {
         $stmtRestaurant->execute($restaurant);
         $restaurantIds[] = $pdo->lastInsertId();
@@ -161,7 +161,7 @@ try {
     ");
     
     $reservationIds = [];
-    // Insertar cada reserva y almacenar su id
+    // Insertar cada reserva y almacenar su ID
     foreach ($reservations as $reservation) {
         $stmtReservation->execute($reservation);
         $reservationIds[] = $pdo->lastInsertId();
@@ -177,7 +177,7 @@ try {
         WHERE id = :restaurant_id
     ");
     
-    // Se asigna a cada restaurante la reserva correspondiente (índice 0 a 14)
+    // Para cada restaurante, asignamos la reserva correspondiente
     for ($i = 0; $i < count($restaurantIds); $i++) {
         $stmtUpdate->execute([
             ':reservation_id' => $reservationIds[$i],
