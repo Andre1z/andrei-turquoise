@@ -2,7 +2,9 @@
 // public/dashboard.php
 
 require_once __DIR__ . '/../config/config.php';
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Verificar si el usuario está logueado; en caso contrario, redirigir a login
 if (!isset($_SESSION['user'])) {
@@ -50,8 +52,7 @@ $user = $_SESSION['user'];
     <main>
         <section class="dashboard-section">
             <h2>Bienvenido, <?php echo htmlspecialchars($user['name']); ?>!</h2>
-            <p>Este es tu panel de control. Aquí podrás gestionar tus datos, ver notificaciones y acceder a las funcionalidades de la aplicación.</p>
-            <!-- Agrega más contenido o widgets según sea necesario -->
+            <p>Este es tu panel de control. Aquí podrás gestionar tus datos y acceder a las funcionalidades de la aplicación.</p>
         </section>
     </main>
     <footer>
