@@ -20,24 +20,20 @@ try {
     $pdo = new PDO("sqlite:" . $databasePath);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Activar el soporte de claves foráneas en SQLite
-    $pdo->exec("PRAGMA foreign_keys = ON");
-
-    // SQL para crear la tabla 'reservations'
+    // Crear la tabla 'restaurants' sin la restricción de clave foránea
     $sql = "
-        CREATE TABLE IF NOT EXISTS reservations (
+        CREATE TABLE IF NOT EXISTS restaurants (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            id_restaurant INTEGER,
-            client_name TEXT NOT NULL,
-            date TEXT DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (id_restaurant) REFERENCES restaurants(id)
+            restaurant_name TEXT NOT NULL,
+            direction TEXT NOT NULL,
+            email TEXT NOT NULL,
+            phone TEXT NOT NULL,
+            id_reservation INTEGER
         );
     ";
 
-    // Ejecutar la instrucción SQL para crear la tabla
     $pdo->exec($sql);
-
-    echo "Tabla 'reservations' creada exitosamente en la base de datos.";
+    echo "Tabla 'restaurants' creada exitosamente (sin foreign keys).";
 } catch (PDOException $e) {
-    die("Error al crear la tabla 'reservations': " . $e->getMessage());
+    die("Error al crear la tabla 'restaurants': " . $e->getMessage());
 }
