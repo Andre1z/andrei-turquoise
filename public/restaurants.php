@@ -12,7 +12,7 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
-// Obtener la conexión a la base de datos
+// Obtener la conexión a la base de datos y consultar registros
 $db = Database::getInstance()->getConnection();
 
 // Consultar todos los restaurantes
@@ -57,6 +57,23 @@ $reservations = $stmt2->fetchAll(PDO::FETCH_ASSOC);
             background-color: #333;
             color: #fff;
         }
+        .action-links {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .action-links a {
+            text-decoration: none;
+            padding: 8px 12px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            margin: 0 5px;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        .action-links a:hover {
+            background-color: #333;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -72,6 +89,11 @@ $reservations = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         </nav>
     </header>
     <main>
+        <!-- Botones para crear nuevos registros -->
+        <div class="action-links">
+            <a href="index.php?page=create_restaurant">Crear Restaurante</a>
+            <a href="index.php?page=create_reservation">Crear Reserva</a>
+        </div>
         <section>
             <h2>Lista de Restaurantes</h2>
             <table>
