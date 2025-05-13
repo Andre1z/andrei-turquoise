@@ -12,7 +12,6 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
-// Obtener la conexión a la base de datos y consultar registros
 $db = Database::getInstance()->getConnection();
 
 // Consultar todos los restaurantes
@@ -28,53 +27,11 @@ $reservations = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Restaurantes y Reservas - <?php echo APP_NAME; ?></title>
+    <!-- Estilos globales -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Estilos específicos para secciones de restaurantes y reservas -->
+    <link rel="stylesheet" href="css/restaurants.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        table {
-            width: 90%;
-            margin: 20px auto;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        th {
-            background-color: #333;
-            color: #fff;
-        }
-        td.actions a {
-            margin-right: 5px;
-            text-decoration: none;
-            padding: 3px 5px;
-            border: 1px solid #333;
-            border-radius: 3px;
-            font-size: 0.9em;
-            color: #333;
-        }
-        td.actions a:hover {
-            background-color: #333;
-            color: #fff;
-        }
-        .action-links {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .action-links a {
-            text-decoration: none;
-            padding: 8px 12px;
-            border: 1px solid #333;
-            border-radius: 4px;
-            margin: 0 5px;
-            background-color: #f2f2f2;
-            color: #333;
-        }
-        .action-links a:hover {
-            background-color: #333;
-            color: #fff;
-        }
-    </style>
 </head>
 <body>
     <header>
