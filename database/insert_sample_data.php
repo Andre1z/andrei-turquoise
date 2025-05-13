@@ -12,7 +12,7 @@
  *      con su correspondiente reserva.
  *
  * Nota: Asegúrate de haber creado previamente las tablas 'restaurants' y 'reservations'
- *       mediante sus respectivos scripts.
+ *       mediante scripts que usen "reservations" (con s) en la cláusula FOREIGN KEY.
  */
 
 // Ruta absoluta al archivo de la base de datos
@@ -22,7 +22,7 @@ try {
     // Conectar a la base de datos SQLite
     $pdo = new PDO("sqlite:" . $databasePath);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // Activar soporte para claves foráneas
+    // Activar soporte para claves foráneas en SQLite
     $pdo->exec("PRAGMA foreign_keys = ON");
 
     // -------------------------------------------------------------------------
@@ -169,7 +169,7 @@ try {
     echo "15 registros insertados en la tabla 'reservations'.\n";
 
     // -------------------------------------------------------------------------
-    // 3. Actualizar el campo 'id_reservation' en 'restaurants'
+    // 3. Actualizar el campo 'id_reservation' en la tabla 'restaurants'
     // -------------------------------------------------------------------------
     $stmtUpdate = $pdo->prepare("
         UPDATE restaurants 
