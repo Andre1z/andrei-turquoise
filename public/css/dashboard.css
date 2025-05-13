@@ -1,16 +1,21 @@
 /* dashboard.css */
 
 .dashboard-section {
-    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    margin: 20px auto;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
     text-align: center;
 }
 
 .dashboard-section h2 {
-    margin-bottom: 10px;
-    font-size: 2em;
+    font-size: 2.5rem;
+    color: #ffda79;
+    margin-bottom: 15px;
 }
 
 .dashboard-section p {
-    font-size: 1.1em;
-    color: #555;
+    font-size: 1.2rem;
+    color: #fff;
 }

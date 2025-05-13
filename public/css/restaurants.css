@@ -1,36 +1,54 @@
 /* restaurants.css */
 
+/* Regla para ajustar el ancho de las secciones */
+section {
+    width: calc(100% - 200px);
+    margin: 20px 100px;
+}
+
+/* Tabla general */
 table {
     width: 90%;
     margin: 20px auto;
     border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
+/* Celdas y encabezados */
 th, td {
+    padding: 12px 15px;
     border: 1px solid #ddd;
-    padding: 8px;
 }
 
 th {
-    background-color: #333;
+    background-color: #ff1493;
     color: #fff;
+    font-size: 1.1rem;
 }
 
+td {
+    text-align: center;
+}
+
+/* Enlaces de acciones en las filas */
 td.actions a {
     margin-right: 5px;
     text-decoration: none;
-    padding: 3px 5px;
-    border: 1px solid #333;
-    border-radius: 3px;
-    font-size: 0.9em;
-    color: #333;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #1e90ff;
+    color: #fff;
+    transition: background-color 0.3s ease;
 }
 
 td.actions a:hover {
-    background-color: #333;
-    color: #fff;
+    background-color: #ff69b4;
 }
 
+/* Botones para crear nuevos registros */
 .action-links {
     text-align: center;
     margin: 20px 0;
@@ -38,15 +56,14 @@ td.actions a:hover {
 
 .action-links a {
     text-decoration: none;
-    padding: 8px 12px;
-    border: 1px solid #333;
-    border-radius: 4px;
-    margin: 0 5px;
-    background-color: #f2f2f2;
-    color: #333;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: #ff1493;
+    color: #fff;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
 }
 
 .action-links a:hover {
-    background-color: #333;
-    color: #fff;
+    background: #ff69b4;
 }
