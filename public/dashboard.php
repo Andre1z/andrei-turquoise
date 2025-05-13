@@ -18,22 +18,11 @@ $user = $_SESSION['user'];
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - <?php echo APP_NAME; ?></title>
+    <!-- Estilos globales -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Estilos específicos del dashboard -->
+    <link rel="stylesheet" href="css/dashboard.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .dashboard-section {
-            padding: 20px;
-            text-align: center;
-        }
-        .dashboard-section h2 {
-            margin-bottom: 10px;
-            font-size: 2em;
-        }
-        .dashboard-section p {
-            font-size: 1.1em;
-            color: #555;
-        }
-    </style>
 </head>
 <body>
     <header>
