@@ -6,13 +6,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Verificar si el usuario está logueado; en caso contrario, redirigir a login
 if (!isset($_SESSION['user'])) {
     header("Location: index.php?page=login");
     exit;
 }
 
-// Obtener los datos del usuario de la sesión
 $user = $_SESSION['user'];
 ?>
 <!DOCTYPE html>
@@ -23,7 +21,6 @@ $user = $_SESSION['user'];
     <link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Estilos básicos adicionales para el dashboard */
         .dashboard-section {
             padding: 20px;
             text-align: center;
@@ -45,6 +42,7 @@ $user = $_SESSION['user'];
             <ul>
                 <li><a href="index.php?page=dashboard" class="active">Dashboard</a></li>
                 <li><a href="index.php?page=profile">Perfil</a></li>
+                <li><a href="index.php?page=restaurants">Restaurantes</a></li>
                 <li><a href="logout.php">Cerrar Sesión</a></li>
             </ul>
         </nav>
